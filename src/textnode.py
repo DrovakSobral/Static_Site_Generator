@@ -28,7 +28,7 @@ class TextNode:
         return f"TextNode({self.text}, {self.text_type.value}, {self.url})"
 
 
-def text_node_to_html_node(text_node):
+def text_node_to_html_node(text_node) -> LeafNode:
     if text_node.text_type == TextType.TEXT:
         return LeafNode(None, text_node.text)
     if text_node.text_type == TextType.BOLD:
@@ -46,7 +46,7 @@ def text_node_to_html_node(text_node):
 
 def split_nodes_delimiter(
     old_nodes: list[TextNode], delimiter: str, text_type: TextType
-):
+) -> list[TextNode]:
     new_nodes = []
     for old_node in old_nodes:
         if old_node.text_type != TextType.TEXT:
