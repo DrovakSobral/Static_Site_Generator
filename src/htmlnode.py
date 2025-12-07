@@ -14,14 +14,31 @@ class HTMLNode:
     def to_html(self):
         raise NotImplementedError
 
-    def props_to_html(self):
+    def props_to_html(self) -> str:
         try:
             result = ""
-            for key in self.props:
-                result += f' {key}="{self.props[key]}"'
+            for prop in self.props:
+                result += f' {prop}="{self.props[prop]}"'
             return result
         except TypeError:
             return ""
 
     def __repr__(self):
         return f"HTMLNode(TAG = {self.tag}, VALUE = {self.value}, CHILDREN = {self.children}, PROPS = {self.props})"
+
+
+class LeafNode(HTMLNode):
+    def __init__(
+        self,
+        tag: str,
+        value: str,
+        props: dict[str, str] = None,
+    ) -> LeafNode:
+        super().__init__(tag, value, None, props)
+    
+    def to_html(self):
+        if self.value is None:
+            raise ValueError("The LeafNode has no value!")
+        if self.tag is None:
+            return self.value
+        return f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
