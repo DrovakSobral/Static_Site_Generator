@@ -45,4 +45,4 @@ def test_leafnode_to_html_link():
 
 def test_leafnode_to_html_img():
     node = LeafNode("img", "", {"src":"url/of/img.jpg", "alt":"description of img"})
-    assert node.to_html() == '<img src="url/of/img.jpg" alt="description of img"></img>'
+    assert node.to_html() == '<img src="url/of/img.jpg" alt="description of img">'
